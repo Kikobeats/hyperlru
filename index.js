@@ -1,6 +1,6 @@
 'use strict'
 
-const exists = (value) => value != null
+const exists = (value) => value !== undefined && value !== null
 
 const DEFAULT = {
   max: 1000
@@ -13,7 +13,7 @@ module.exports = function LRU (opts) {
   let cache = {}
   let _cache = {}
 
-  const max = opts.max
+  const {max} = opts
   let size = max
 
   const keys = () => Object.keys(_cache).concat(Object.keys(cache))
@@ -38,6 +38,7 @@ module.exports = function LRU (opts) {
   const set = (key, value) => {
     if (cache[key]) cache[key] = value
     else update(key, value)
+    return value
   }
 
   const hasKey = key => (
