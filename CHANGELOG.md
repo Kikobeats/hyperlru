@@ -1,3 +1,10 @@
+<a name="1.0.2"></a>
+## 1.0.2 (2017-10-01)
+
+* Update doc ([9134b9e](https://github.com/kikobeats/hyperlru/commit/9134b9e))
+
+
+
 <a name="1.0.1"></a>
 ## 1.0.1 (2017-10-01)
 
