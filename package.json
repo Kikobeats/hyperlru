@@ -1,6 +1,6 @@
 {
   "name": "hyperlru",
-  "description": "Faster and simple LRU implementation.",
+  "description": "Tiny & Fast LRU Implementation as possible",
   "homepage": "https://github.com/Kikobeats/hyperlru",
   "version": "1.0.1",
   "main": "index.js",
@@ -17,8 +17,17 @@
     "url": "https://github.com/Kikobeats/hyperlru/issues"
   },
   "keywords": [
+    "buffer",
     "cache",
-    "lru"
+    "caching",
+    "fast",
+    "hash",
+    "least",
+    "lru",
+    "mru",
+    "quick",
+    "recently",
+    "used"
   ],
   "devDependencies": {
     "coveralls": "latest",

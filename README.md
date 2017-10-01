@@ -8,19 +8,17 @@
 [![NPM Status](https://img.shields.io/npm/dm/hyperlru.svg?style=flat-square)](https://www.npmjs.org/package/hyperlru)
 [![Donate](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square)](https://paypal.me/Kikobeats)
 
-> Faster and simple LRU implementation.
+> Tiny & Fast LRU Implementation as possible.
 
-## Introduction
+## Features
 
-The main goal of this project is provide a good implementation of LRU algorithm as simple as possible, but also fast.
+* **Fast**: Ultra-high performance (See [benchmark](#benchmark)).
+* **Simple**: The whole project is ~60 lines of code.
+* **Lightweight**: The package weighs less than a megabyte, with zero dependencies.
 
-The idea of this project was born from [bench-lru](https://github.com/dominictarr/bench-lru) and [dominictarr](https://github.com/dominictarr)'s implementation avoiding linked list (see [hashlru](https://github.com/dominictarr/hashlru)).
+**hyperlru** claim to be fast and simple as possible. There are a lot of LRU implementations, but most of them have a poor perfomance and they are hard to understand.
 
-Meanwhile hashlru is faster in `get`/`set`, it fails providing a consistent `.keys` because avoid linked list implementation has limitations.
-
-The main goal of this project is be consistent, simple and faster as possible.
-
-Also it's inspired in [lru](https://github.com/chriso/lru), one of my favorite.
+It's Inspired by the [hashlru](https://github.com/dominictarr/hashlru) algorithm.
 
 ## Install
 
@@ -37,12 +35,20 @@ const cache = hyperlru({max: 1000})
 
 ## Benchmark
 
-| name      |  set  |  get1  |  update |  get2  |  evict | 
-|-----------|-------|--------|---------|--------|--------| 
-| hyperlru  |  2041 |  25000 |  2326   |  16667 |  2326  | 
-| hashlru   |  7692 |  10000 |  6250   |  5556  |  4348  | 
-| lru-cache |  405  |  1351  |  769    |  2439  |  385   | 
-| lru       |  2273 |  4000  |  3704   |  4545  |  13    |
+| name                                                | size    | gzip    | set      | get1      | update    | get2      | evict    |
+|-----------------------------------------------------|---------|---------|----------|-----------|-----------|-----------|----------|
+| [lru-cache](https://npm.im/lru-cache)               | 19.1 kB | 6.23 kB | 922 ops  | 3030 ops  | 2105 ops  | 4082 ops  | 917 ops  |
+| [modern-lru](https://npm.im/modern-lru)             | 2.27 kB | 907 B   | 813 ops  | 1299 ops  | 752 ops   | 1515 ops  | 629 ops  |
+| [mkc](https://npm.im/mkc)                           | 10.5 kB | 3.61 kB | 784 ops  | 766 ops   | 810 ops   | 1149 ops  | 697 ops  |
+| [lru_cache](https://npm.im/lru_cache)               | 2.19 kB | 756 B   | 6452 ops | 18182 ops | 14286 ops | 9524 ops  | 3509 ops |
+| [hashlru](https://npm.im/hashlru)                   | 628 B   | 332 B   | 5263 ops | 6897 ops  | 4545 ops  | 7407 ops  | 3922 ops |
+| [tiny-lru](https://npm.im/tiny-lru)                 | 4 kB    | 1.64 kB | 3509 ops | 11765 ops | 15385 ops | 11765 ops | 2222 ops |
+| [quick-lru](https://npm.im/quick-lru)               | 1.23 kB | 489 B   | 3279 ops | 2198 ops  | 3226 ops  | 2105 ops  | 2778 ops |
+| [lru](https://npm.im/lru)                           | 6.07 kB | 1.86 kB | 2500 ops | 3846 ops  | 3175 ops  | 3226 ops  | 976 ops  |
+| [hyperlru](https://npm.im/hyperlru)                 | 889 B   | 395 B   | 2299 ops | 25000 ops | 2410 ops  | 22222 ops | 2439 ops |
+| [lru-fast](https://npm.im/lru-fast)                 | 2.34 kB | 793 B   | 1869 ops | 6897 ops  | 4167 ops  | 16667 ops | 3077 ops |
+| [simple-lru-cache](https://npm.im/simple-lru-cache) | 1.43 kB | 565 B   | 1709 ops | 13333 ops | 5128 ops  | 22222 ops | 3922 ops |
+| [secondary-cache](https://npm.im/secondary-cache)   | 22.6 kB | 6.54 kB | 1695 ops | 2632 ops  | 2667 ops  | 5556 ops  | 1408 ops |
 
 ## API
 
@@ -57,10 +63,25 @@ Default: `1000`
 
 Max of element to keep into the cache.
 
-### .set
-### .get
-### .keys
-### .clear
+### .set(key, value)
+
+Set the value of the key and mark the key as most recently used.
+
+It returns the `value`.
+
+### .get(key)
+
+Query the value of the key and mark the key as most recently used.
+
+It returns the value of key if found; `undefined` otherwise.
+
+### .keys()
+
+It retrieves all the keys currently in the cache.
+
+### .clear()
+
+Clear all the elements in the cache.
 
 ## License
 
