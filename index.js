@@ -19,9 +19,7 @@ function LRU (opts) {
 }
 
 LRU.prototype.keys = function keys () {
-  const cache = Object.keys(this.cache)
-  const _cache = Object.keys(this._cache)
-  return _cache.concat(cache)
+  return Object.keys(this._cache).concat(Object.keys(this.cache))
 }
 
 LRU.prototype.clear = function clear () {
