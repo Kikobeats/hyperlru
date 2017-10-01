@@ -18,22 +18,18 @@ function LRU (opts) {
   this.size = this.max
 }
 
-Object.defineProperty(LRU.prototype, 'keys', {
-  value: function () {
-    const cache = Object.keys(this.cache)
-    const _cache = Object.keys(this._cache)
-    return _cache.concat(cache)
-  }
-})
+LRU.prototype.keys = function keys () {
+  const cache = Object.keys(this.cache)
+  const _cache = Object.keys(this._cache)
+  return _cache.concat(cache)
+}
 
-Object.defineProperty(LRU.prototype, 'clear', {
-  value: function () {
-    this.cache = {}
-    this._cache = {}
-  }
-})
+LRU.prototype.clear = function clear () {
+  this.cache = {}
+  this._cache = {}
+}
 
-LRU.prototype.get = function (key) {
+LRU.prototype.get = function get (key) {
   if (!this._hasKey(key)) return
 
   let value = this.cache[key]
@@ -45,16 +41,16 @@ LRU.prototype.get = function (key) {
   return value
 }
 
-LRU.prototype.set = function (key, value) {
+LRU.prototype.set = function set (key, value) {
   if (this.cache[key]) this.cache[key] = value
   else this._update(key, value)
 }
 
-LRU.prototype._hasKey = function (key) {
+LRU.prototype._hasKey = function _hasKey (key) {
   return this.cache.hasOwnProperty(key) || this._cache.hasOwnProperty(key)
 }
 
-LRU.prototype._update = function (key, value) {
+LRU.prototype._update = function _update (key, value) {
   --this.size
 
   if (this.size) {
