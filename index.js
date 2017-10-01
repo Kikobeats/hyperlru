@@ -34,7 +34,7 @@ Object.defineProperty(LRU.prototype, 'clear', {
 })
 
 LRU.prototype.get = function (key) {
-  if (!this.cache.hasOwnProperty(key) && !this._cache.hasOwnProperty(key)) return
+  if (!this._hasKey(key)) return
 
   let value = this.cache[key]
   if (exists(value)) return value
@@ -48,6 +48,10 @@ LRU.prototype.get = function (key) {
 LRU.prototype.set = function (key, value) {
   if (this.cache[key]) this.cache[key] = value
   else this._update(key, value)
+}
+
+LRU.prototype._hasKey = function (key) {
+  return this.cache.hasOwnProperty(key) || this._cache.hasOwnProperty(key)
 }
 
 LRU.prototype._update = function (key, value) {
