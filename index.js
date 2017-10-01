@@ -6,58 +6,55 @@ const DEFAULT = {
   max: 1000
 }
 
-function LRU (opts) {
+module.exports = function LRU (opts) {
   if (!(this instanceof LRU)) return new LRU(opts)
-
   opts = Object.assign({}, DEFAULT, opts)
 
-  this.cache = {}
-  this._cache = {}
+  let cache = {}
+  let _cache = {}
 
-  this.max = opts.max
-  this.size = this.max
-}
+  const max = opts.max
+  let size = max
 
-LRU.prototype.keys = function keys () {
-  return Object.keys(this._cache).concat(Object.keys(this.cache))
-}
+  const keys = () => Object.keys(_cache).concat(Object.keys(cache))
 
-LRU.prototype.clear = function clear () {
-  this.cache = {}
-  this._cache = {}
-}
-
-LRU.prototype.get = function get (key) {
-  if (!this._hasKey(key)) return
-
-  let value = this.cache[key]
-  if (exists(value)) return value
-
-  value = this._cache[key]
-  if (value) this._update(key, value)
-
-  return value
-}
-
-LRU.prototype.set = function set (key, value) {
-  if (this.cache[key]) this.cache[key] = value
-  else this._update(key, value)
-}
-
-LRU.prototype._hasKey = function _hasKey (key) {
-  return this.cache.hasOwnProperty(key) || this._cache.hasOwnProperty(key)
-}
-
-LRU.prototype._update = function _update (key, value) {
-  --this.size
-
-  if (this.size) {
-    this.size = this.max
-    this._cache = this.cache
-    this.cache = {}
+  const clear = () => {
+    cache = {}
+    _cache = {}
   }
 
-  this.cache[key] = value
-}
+  const get = key => {
+    if (!hasKey(key)) return
 
-module.exports = LRU
+    let value = cache[key]
+    if (exists(value)) return value
+
+    value = _cache[key]
+    if (value) update(key, value)
+
+    return value
+  }
+
+  const set = (key, value) => {
+    if (cache[key]) cache[key] = value
+    else update(key, value)
+  }
+
+  const hasKey = key => (
+    cache.hasOwnProperty(key) || _cache.hasOwnProperty(key)
+  )
+
+  const update = (key, value) => {
+    --size
+
+    if (size) {
+      size = max
+      _cache = cache
+      cache = {}
+    }
+
+    cache[key] = value
+  }
+
+  return { clear, get, set, keys }
+}
