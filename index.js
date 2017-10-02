@@ -3,8 +3,8 @@
 const LinkedList = require('linked-list')
 const exists = value => value !== undefined
 
-function hyperlru ({max}) {
-  let dict = new Map()
+const hyperlru = createStore => ({max}) => {
+  let dict = createStore()
   let list = new LinkedList()
   let size = 0
 
