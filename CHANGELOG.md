@@ -1,3 +1,10 @@
+<a name="2.0.2"></a>
+## 2.0.2 (2017-10-02)
+
+* Add missing file ([1b05191](https://github.com/kikobeats/hyperlru/commit/1b05191))
+
+
+
 <a name="2.0.1"></a>
 ## 2.0.1 (2017-10-02)
 

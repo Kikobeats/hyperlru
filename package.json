@@ -2,7 +2,7 @@
   "name": "hyperlru",
   "description": "Tiny & Fast LRU Implementation as possible",
   "homepage": "https://github.com/Kikobeats/hyperlru",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "index.js",
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
@@ -46,8 +46,8 @@
   },
   "files": [
     "index.js",
-    "test/index.js",
-    "src/index.js"
+    "src/index.js",
+    "test/index.js"
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
