@@ -18,10 +18,15 @@
 
 There are a lot of LRU implementations, but most of them have a poor perfomance and they are hard to understand.
 
-**hyperlru** is implemented using traditional and efficienty data structures:
+**hyperlru** is an Abstract LRU implementation using traditional and efficienty data structures:
 
  - **Double Linked List**: It maintains the least recent list of items.
  - **Hash Table** It keeps the data for easily access to cache content.
+
+For use it, you need to provide one of the created providers:
+
+- [hyperlru-object](https://github.com/Kikobeats/hyperlru-object)
+- [hyperlru-map](https://github.com/Kikobeats/hyperlru-map)
 
 ## Install
 
@@ -33,18 +38,11 @@ $ npm install hyperlru --save
 
 ```js
 const hyperlru = require('hyperlru')
-const cache = hyperlru({max: 1000})
+const myProvider = require('my-hyperlru-provider')
+
+const createLRU = hyperlru(myProvider)
+const cache = createLRU({max: 1000})
 ```
-
-**hyperlru** is an LRU interface that can provide different implementation backed using different stores.
-
-The store used by default is an `object`:
-
-```js
-const hyperlru = require('hyperlru')
-const {object: hyperlru} require('hyperlru') // same
-```
-
 
 ## Benchmark
 
@@ -88,13 +86,29 @@ Query the value of the key and mark the key as most recently used.
 
 It returns the value of key if found; `undefined` otherwise.
 
+### .peek(key)
+
+Query the value of the key without marking the key as most recently used.
+
+It returns the value of key if found; `undefined` otherwise.
+
 ### .keys()
 
 It retrieves all the keys currently in the cache.
 
+### .values()
+
+It retrieves all the values currently in the cache.
+
 ### .clear()
 
 Clear all the elements in the cache.
+
+### .remove(key)
+
+Remove the value from the cache.
+
+Returns: value of key if found; `undefined` otherwise.
 
 ## License
 

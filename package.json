@@ -49,7 +49,7 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard-markdown && standard",
     "pretest": "npm run lint",
-    "test": "nyc mocha"
+    "test": "echo 'test on connectors'"
   },
   "license": "MIT",
   "standard": {
@@ -59,7 +59,6 @@
     ]
   },
   "dependencies": {
-    "linked-list": "~1.0.3",
-    "lodash.omit": "~4.5.0"
+    "linked-list": "~1.0.3"
   }
 }

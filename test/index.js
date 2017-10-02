@@ -4,7 +4,7 @@ const should = require('should')
 const range = n => [...Array(n).keys()]
 const hyperlru = require('..')
 
-module.exports = (createStore) => {
+module.exports = createStore => {
   const createLRU = hyperlru(createStore)
 
   describe('constructor', function () {

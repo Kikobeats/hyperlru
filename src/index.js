@@ -59,7 +59,7 @@ const hyperlru = createStore => {
     const peek = _get({isPeek: false})
     const values = () => dict.values()
 
-    return {set, keys, get, clear, remove, has, peek, size, values}
+    return {set, keys, get, clear, remove, has, peek, values}
   }
 }
 
