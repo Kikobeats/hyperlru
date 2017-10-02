@@ -3,7 +3,7 @@
   "description": "Tiny & Fast LRU Implementation as possible",
   "homepage": "https://github.com/Kikobeats/hyperlru",
   "version": "1.0.2",
-  "main": "index.js",
+  "main": "src",
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
     "name": "Kiko Beats",
