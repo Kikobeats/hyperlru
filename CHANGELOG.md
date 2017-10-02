@@ -1,3 +1,16 @@
+<a name="2.0.0"></a>
+# 2.0.0 (2017-10-02)
+
+* Move specific implementations in separate pkgs ([0656386](https://github.com/kikobeats/hyperlru/commit/0656386))
+* Tweaks ([9b5e125](https://github.com/kikobeats/hyperlru/commit/9b5e125))
+* WIP ([3ff855a](https://github.com/kikobeats/hyperlru/commit/3ff855a))
+* WIP ([adb4be1](https://github.com/kikobeats/hyperlru/commit/adb4be1))
+* WIP ([e81cd9d](https://github.com/kikobeats/hyperlru/commit/e81cd9d))
+* WIP ([5fc3f74](https://github.com/kikobeats/hyperlru/commit/5fc3f74))
+* WIP ([fd0456e](https://github.com/kikobeats/hyperlru/commit/fd0456e))
+
+
+
 <a name="1.0.2"></a>
 ## 1.0.2 (2017-10-01)
 
