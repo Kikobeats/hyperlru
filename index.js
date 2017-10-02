@@ -1,58 +1,62 @@
 'use strict'
 
+const LinkedList = require('linked-list')
 const exists = value => value !== undefined
 
-const DEFAULT = {
-  max: 1000
-}
+function hyperlru ({max}) {
+  let dict = new Map()
+  let list = new LinkedList()
+  let size = 0
 
-module.exports = function LRU (opts) {
-  opts = Object.assign(Object.create(null), DEFAULT, opts)
-  const {max} = opts
-  let size = max
-  let cache = Object.create(null)
-  let _cache = Object.create(null)
-
-  function update (key, value) {
-    --size
-    if (size) {
-      size = max
-      _cache = cache
-      cache = Object.create(null)
-    }
-    cache[key] = value
+  const _get = ({isPeek}) => (key) => {
+    const entry = dict.get(key)
+    if (!exists(entry)) return
+    if (isPeek) markEntryAsUsed(entry)
+    return entry.value
   }
 
-  function clear () {
-    cache = Object.create(null)
-    _cache = Object.create(null)
-  }
-
-  function keys () {
-    return Object.keys(_cache).concat(Object.keys(cache))
-  }
-
-  function get (key) {
-    if (!has(key)) return
-
-    let value = cache[key]
-    if (exists(value)) return value
-
-    value = _cache[key]
-    if (value) update(key, value)
-
-    return value
+  function markEntryAsUsed (entry) {
+    if (list.tail.key !== entry.key) list.append(entry.detach())
   }
 
   function set (key, value) {
-    if (exists(cache[key])) cache[key] = value
-    else update(key, value)
-    return value
+    const entry = dict.get(key)
+
+    if (exists(entry)) {
+      entry.value = value
+      markEntryAsUsed(entry)
+      return value
+    }
+
+    if (++size > max) dict.delete(list.head.detach().key)
+    const item = Object.assign(new LinkedList.Item(), {key, value})
+    list.append(item)
+    dict.set(key, item)
   }
 
-  function has (key) {
-    return exists(cache[key]) || exists(_cache[key])
+  function clear () {
+    dict = new Map()
+    list = new LinkedList()
+    size = 0
   }
 
-  return {get, set, has, keys, clear}
+  function remove (key) {
+    const entry = dict.get(key)
+    if (!exists(entry)) return
+    dict.delete(entry.detach().key)
+    --size
+  }
+
+  function* values () {
+    for (const entry of dict) yield entry[1].value
+  }
+
+  const keys = () => dict.keys()
+  const has = key => dict.has(key)
+  const get = _get({isPeek: true})
+  const peek = _get({isPeek: false})
+
+  return {set, keys, get, clear, remove, has, peek, size, values}
 }
+
+module.exports = hyperlru
