@@ -46,20 +46,21 @@ const cache = createLRU({max: 1000})
 
 ## Benchmark
 
-| name                                                | size    | gzip    | set      | get1      | update    | get2      | evict    |
-|-----------------------------------------------------|---------|---------|----------|-----------|-----------|-----------|----------|
-| [lru-cache](https://npm.im/lru-cache)               | 19.1 kB | 6.23 kB | 922 ops  | 3030 ops  | 2105 ops  | 4082 ops  | 917 ops  |
-| [modern-lru](https://npm.im/modern-lru)             | 2.27 kB | 907 B   | 813 ops  | 1299 ops  | 752 ops   | 1515 ops  | 629 ops  |
-| [mkc](https://npm.im/mkc)                           | 10.5 kB | 3.61 kB | 784 ops  | 766 ops   | 810 ops   | 1149 ops  | 697 ops  |
-| [lru_cache](https://npm.im/lru_cache)               | 2.19 kB | 756 B   | 6452 ops | 18182 ops | 14286 ops | 9524 ops  | 3509 ops |
-| [hashlru](https://npm.im/hashlru)                   | 628 B   | 332 B   | 5263 ops | 6897 ops  | 4545 ops  | 7407 ops  | 3922 ops |
-| [tiny-lru](https://npm.im/tiny-lru)                 | 4 kB    | 1.64 kB | 3509 ops | 11765 ops | 15385 ops | 11765 ops | 2222 ops |
-| [quick-lru](https://npm.im/quick-lru)               | 1.23 kB | 489 B   | 3279 ops | 2198 ops  | 3226 ops  | 2105 ops  | 2778 ops |
-| [lru](https://npm.im/lru)                           | 6.07 kB | 1.86 kB | 2500 ops | 3846 ops  | 3175 ops  | 3226 ops  | 976 ops  |
-| [hyperlru](https://npm.im/hyperlru)                 | 889 B   | 395 B   | 2299 ops | 25000 ops | 2410 ops  | 22222 ops | 2439 ops |
-| [lru-fast](https://npm.im/lru-fast)                 | 2.34 kB | 793 B   | 1869 ops | 6897 ops  | 4167 ops  | 16667 ops | 3077 ops |
-| [simple-lru-cache](https://npm.im/simple-lru-cache) | 1.43 kB | 565 B   | 1709 ops | 13333 ops | 5128 ops  | 22222 ops | 3922 ops |
-| [secondary-cache](https://npm.im/secondary-cache)   | 22.6 kB | 6.54 kB | 1695 ops | 2632 ops  | 2667 ops  | 5556 ops  | 1408 ops |
+| name                                                | size    | gzip    | set  | get1  | update | get2  | evict |
+|-----------------------------------------------------|---------|---------|------|-------|--------|-------|-------|
+| [lru-fast](https://npm.im/lru-fast)                 | 2.34 kB | 793 B   | 6415 | 26349 | 16054  | 24048 | 4061  |
+| [lru_cache](https://npm.im/lru_cache)               | 2.19 kB | 756 B   | 5776 | 17463 | 10382  | 11902 | 3497  |
+| [simple-lru-cache](https://npm.im/simple-lru-cache) | 1.43 kB | 565 B   | 3230 | 15083 | 7961   | 17664 | 3719  |
+| [tiny-lru](https://npm.im/tiny-lru)                 | 4 kB    | 1.64 kB | 5665 | 9901  | 14504  | 13109 | 3923  |
+| [hyperlru-object](https://npm.im/hyperlru-object)   | 433 B   | 265 B   | 1123 | 8842  | 6996   | 9904  | 1051  |
+| [hashlru](https://npm.im/hashlru)                   | 628 B   | 332 B   | 4736 | 5697  | 4473   | 5767  | 4233  |
+| [hyperlru-map](https://npm.im/hyperlru-map)         | 329 B   | 232 B   | 783  | 4425  | 4048   | 4470  | 670   |
+| [lru-cache](https://npm.im/lru-cache)               | 19.1 kB | 6.23 kB | 1049 | 4826  | 3155   | 4308  | 807   |
+| [lru](https://npm.im/lru)                           | 6.07 kB | 1.86 kB | 2573 | 3198  | 2565   | 3493  | 1342  |
+| [secondary-cache](https://npm.im/secondary-cache)   | 22.6 kB | 6.54 kB | 1477 | 2758  | 2313   | 4584  | 1065  |
+| [quick-lru](https://npm.im/quick-lru)               | 1.23 kB | 489 B   | 2122 | 2020  | 2612   | 2091  | 2498  |
+| [modern-lru](https://npm.im/modern-lru)             | 2.27 kB | 907 B   | 790  | 2067  | 1756   | 1789  | 584   |
+| [mkc](https://npm.im/mkc)                           | 10.5 kB | 3.61 kB | 823  | 1289  | 880    | 1523  | 626   |
 
 ## API
 
