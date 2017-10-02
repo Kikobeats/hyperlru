@@ -46,7 +46,8 @@
   },
   "files": [
     "index.js",
-    "test/index.js"
+    "test/index.js",
+    "src/index.js"
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
