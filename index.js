@@ -48,7 +48,7 @@ module.exports = function LRU (opts) {
   const update = (key, value) => {
     --size
 
-    if (size) {
+    if (!size) {
       size = max
       _cache = cache
       cache = {}
