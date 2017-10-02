@@ -12,13 +12,16 @@
 
 ## Features
 
-* **Fast**: Ultra-high performance (See [benchmark](#benchmark)).
+* **Fast**: High performance (See [benchmark](#benchmark)).
 * **Simple**: The whole project is ~60 lines of code.
 * **Lightweight**: The package weighs less than a megabyte, with zero dependencies.
 
-**hyperlru** claim to be fast and simple as possible. There are a lot of LRU implementations, but most of them have a poor perfomance and they are hard to understand.
+There are a lot of LRU implementations, but most of them have a poor perfomance and they are hard to understand.
 
-It's Inspired by the [hashlru](https://github.com/dominictarr/hashlru) algorithm.
+**hyperlru** is implemented using traditional and efficienty data structures:
+
+ - **Double Linked List**: It maintains the least recent list of items.
+ - **Hash Table** It keeps the data for easily access to cache content.
 
 ## Install
 
@@ -32,6 +35,16 @@ $ npm install hyperlru --save
 const hyperlru = require('hyperlru')
 const cache = hyperlru({max: 1000})
 ```
+
+**hyperlru** is an LRU interface that can provide different implementation backed using different stores.
+
+The store used by default is an `object`:
+
+```js
+const hyperlru = require('hyperlru')
+const {object: hyperlru} require('hyperlru') // same
+```
+
 
 ## Benchmark
 

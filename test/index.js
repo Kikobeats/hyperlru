@@ -1,10 +1,12 @@
 'use strict'
 
 const should = require('should')
-const createLRU = require('..')
-const range = (n) => [...Array(n).keys()]
+const range = n => [...Array(n).keys()]
+const hyperlru = require('..')
 
-describe('hyperlru', function () {
+module.exports = (createStore) => {
+  const createLRU = hyperlru(createStore)
+
   describe('constructor', function () {
     describe('options', function () {
       it('max', function () {
@@ -20,15 +22,17 @@ describe('hyperlru', function () {
       const cache = createLRU({max: 3})
       should(cache.get('foo')).be.undefined()
     })
+    it('return previous declared value', function () {
+      const cache = createLRU({max: 3})
+      cache.set('foo', 'bar')
+      should(cache.get('foo')).be.equal('bar')
+    })
   })
 
   describe('.set', function () {
     it('set a value and retrieve it', function () {
       const cache = createLRU({max: 3})
-      cache.set('foo', 'bar')
-      cache.set('bar', 'foo')
-      cache.set('hello', 'world')
-      cache.get('foo').should.be.equal('bar')
+      should(cache.set('foo', 'bar')).be.equal('bar')
     })
   })
 
@@ -73,4 +77,4 @@ describe('hyperlru', function () {
       should(cache.values()).be.eql(['bar'])
     })
   })
-})
+}
