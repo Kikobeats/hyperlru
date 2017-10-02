@@ -1,30 +1,39 @@
 'use strict'
 
-const exists = (value) => value !== undefined && value !== null
+const exists = value => value !== undefined
 
 const DEFAULT = {
   max: 1000
 }
 
 module.exports = function LRU (opts) {
-  if (!(this instanceof LRU)) return new LRU(opts)
-  opts = Object.assign({}, DEFAULT, opts)
-
-  let cache = {}
-  let _cache = {}
-
+  opts = Object.assign(Object.create(null), DEFAULT, opts)
   const {max} = opts
   let size = max
+  let cache = Object.create(null)
+  let _cache = Object.create(null)
 
-  const keys = () => Object.keys(_cache).concat(Object.keys(cache))
-
-  const clear = () => {
-    cache = {}
-    _cache = {}
+  function update (key, value) {
+    --size
+    if (size) {
+      size = max
+      _cache = cache
+      cache = Object.create(null)
+    }
+    cache[key] = value
   }
 
-  const get = key => {
-    if (!hasKey(key)) return
+  function clear () {
+    cache = Object.create(null)
+    _cache = Object.create(null)
+  }
+
+  function keys () {
+    return Object.keys(_cache).concat(Object.keys(cache))
+  }
+
+  function get (key) {
+    if (!has(key)) return
 
     let value = cache[key]
     if (exists(value)) return value
@@ -35,27 +44,15 @@ module.exports = function LRU (opts) {
     return value
   }
 
-  const set = (key, value) => {
-    if (cache[key]) cache[key] = value
+  function set (key, value) {
+    if (exists(cache[key])) cache[key] = value
     else update(key, value)
     return value
   }
 
-  const hasKey = key => (
-    cache.hasOwnProperty(key) || _cache.hasOwnProperty(key)
-  )
-
-  const update = (key, value) => {
-    --size
-
-    if (size) {
-      size = max
-      _cache = cache
-      cache = {}
-    }
-
-    cache[key] = value
+  function has (key) {
+    return exists(cache[key]) || exists(_cache[key])
   }
 
-  return { clear, get, set, keys }
+  return {get, set, has, keys, clear}
 }

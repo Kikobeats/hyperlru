@@ -10,9 +10,7 @@ describe('hyperlru', function () {
       it('max', function () {
         const cache = createLRU({max: 2})
         range(3).forEach((n) => cache.set(`foo${n}`, `bar${n}`))
-        should(cache.get('foo0')).be.undefined()
-        should(cache.get('foo1')).be.equal('bar1')
-        should(cache.get('foo2')).be.equal('bar2')
+        should(cache.keys()).be.eql(['foo1', 'foo2'])
       })
     })
   })
