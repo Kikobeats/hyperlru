@@ -50,6 +50,8 @@ const cache = hyperlru({max: 1000})
 | [simple-lru-cache](https://npm.im/simple-lru-cache) | 1.43 kB | 565 B   | 1709 ops | 13333 ops | 5128 ops  | 22222 ops | 3922 ops |
 | [secondary-cache](https://npm.im/secondary-cache)   | 22.6 kB | 6.54 kB | 1695 ops | 2632 ops  | 2667 ops  | 5556 ops  | 1408 ops |
 
+See more at [bench-lru](https://github.com/dominictarr/bench-lru).
+
 ## API
 
 ### hyperlru([options])
