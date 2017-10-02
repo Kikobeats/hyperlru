@@ -4,12 +4,12 @@ const LinkedList = require('linked-list')
 const exists = value => value !== undefined
 
 function hyperlru ({max}) {
-  let dict = new Map()
+  let dict = Object.create(null)
   let list = new LinkedList()
   let size = 0
 
   const _get = ({isPeek}) => (key) => {
-    const entry = dict.get(key)
+    const entry = dict[key]
     if (!exists(entry)) return
     if (isPeek) markEntryAsUsed(entry)
     return entry.value
@@ -20,7 +20,7 @@ function hyperlru ({max}) {
   }
 
   function set (key, value) {
-    const entry = dict.get(key)
+    const entry = dict[key]
 
     if (exists(entry)) {
       entry.value = value
@@ -28,31 +28,40 @@ function hyperlru ({max}) {
       return value
     }
 
-    if (++size > max) dict.delete(list.head.detach().key)
+    if (++size > max) {
+      const last = list.head.detach().key
+      dict[last] = undefined
+    }
     const item = Object.assign(new LinkedList.Item(), {key, value})
     list.append(item)
-    dict.set(key, item)
+    dict[key] = item
   }
 
   function clear () {
-    dict = new Map()
+    dict = Object.create(null)
     list = new LinkedList()
     size = 0
   }
 
   function remove (key) {
-    const entry = dict.get(key)
+    const entry = dict[key]
     if (!exists(entry)) return
-    dict.delete(entry.detach().key)
+    dict[entry.detach().key] = undefined
     --size
   }
 
-  function* values () {
-    for (const entry of dict) yield entry[1].value
-  }
+  const keys = () => Object.keys(dict).reduce((acc, key) => {
+    if (exists(dict[key])) acc.push(key)
+    return acc
+  }, [])
 
-  const keys = () => dict.keys()
-  const has = key => dict.has(key)
+  const values = () => Object.keys(dict).reduce((acc, key) => {
+    const entry = dict[key]
+    if (exists(entry)) acc.push(entry.value)
+    return acc
+  }, [])
+
+  const has = key => exists(dict[key])
   const get = _get({isPeek: true})
   const peek = _get({isPeek: false})
 
