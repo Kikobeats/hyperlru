@@ -11,8 +11,8 @@ module.exports = createStore => {
     describe('options', function () {
       it('max', function () {
         const cache = createLRU({max: 3})
-        range(4).forEach((n) => cache.set(`foo${n}`, `bar${n}`))
-        should(cache.keys()).be.eql(['foo1', 'foo2', 'foo3'])
+        range(10).forEach((n) => cache.set(`foo${n}`, `bar${n}`))
+        should(cache.keys()).be.eql(['foo7', 'foo8', 'foo9'])
       })
     })
   })
@@ -24,8 +24,8 @@ module.exports = createStore => {
     })
     it('return previous declared value', function () {
       const cache = createLRU({max: 3})
-      cache.set('foo', 'bar')
-      should(cache.get('foo')).be.equal('bar')
+      range(10).forEach((n) => cache.set(`foo${n}`, `bar${n}`))
+      should(cache.get('foo8')).be.equal('bar8')
     })
   })
 
