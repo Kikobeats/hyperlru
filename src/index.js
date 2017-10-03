@@ -11,7 +11,9 @@ const hyperlru = createStore => {
   return ({max}) => {
     let dict = createStore()
     let list = new LinkedList()
-    let size = 0
+    let size = max
+
+    const markEntryAsUsed = entry => list.append(entry.detach())
 
     const _get = ({isPeek}) => key => {
       const entry = dict.get(key)
@@ -20,21 +22,17 @@ const hyperlru = createStore => {
       return entry.value
     }
 
-    function markEntryAsUsed (entry) {
-      list.append(entry.detach())
-    }
-
     function set (key, value) {
-      const entry = dict.get(key)
+      let entry = dict.get(key)
 
       if (exists(entry)) {
         entry.value = value
         markEntryAsUsed(entry)
       } else {
-        if (++size > max) dict.delete(list.head.detach().key)
-        const item = Object.assign(new LinkedList.Item(), {key, value})
-        list.append(item)
-        dict.set(key, item)
+        entry = Object.assign(new LinkedList.Item(), {key, value})
+        dict.set(key, entry)
+        !size ? dict.delete(list.head.detach().key) : --size
+        list.append(entry)
       }
 
       return value
