@@ -13,12 +13,10 @@ const hyperlru = createStore => {
     let list = new LinkedList()
     let size = max
 
-    const markEntryAsUsed = entry => list.append(entry.detach())
-
     const _get = ({isPeek}) => key => {
       const entry = dict.get(key)
       if (!exists(entry)) return
-      if (isPeek) markEntryAsUsed(entry)
+      if (isPeek) list.append(entry)
       return entry.value
     }
 
@@ -27,7 +25,7 @@ const hyperlru = createStore => {
 
       if (exists(entry)) {
         entry.value = value
-        markEntryAsUsed(entry)
+        list.append(entry)
       } else {
         entry = Object.assign(new LinkedList.Item(), {key, value})
         dict.set(key, entry)
