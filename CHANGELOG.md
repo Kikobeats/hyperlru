@@ -1,3 +1,13 @@
+<a name="2.1.0"></a>
+# 2.1.0 (2017-10-03)
+
+* Add more tests ([6499306](https://github.com/kikobeats/hyperlru/commit/6499306))
+* Avoid increment size under max ([22b02c0](https://github.com/kikobeats/hyperlru/commit/22b02c0))
+* Avoid unnecessary method ([576199f](https://github.com/kikobeats/hyperlru/commit/576199f))
+* Update ([a9490eb](https://github.com/kikobeats/hyperlru/commit/a9490eb))
+
+
+
 <a name="2.0.2"></a>
 ## 2.0.2 (2017-10-02)
 
