@@ -33,11 +33,7 @@
     "linked-list": "~1.0.3"
   },
   "devDependencies": {
-    "coveralls": "latest",
     "git-dirty": "latest",
-    "mocha": "latest",
-    "nyc": "latest",
-    "should": "latest",
     "standard": "latest",
     "standard-markdown": "latest"
   },
@@ -51,7 +47,6 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard-markdown && standard",
     "pretest": "npm run lint",
     "test": "echo 'test on connectors'"
