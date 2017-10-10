@@ -1,3 +1,10 @@
+<a name="2.1.1"></a>
+## 2.1.1 (2017-10-10)
+
+* Remove unnecessary deps ([8f1a85c](https://github.com/kikobeats/hyperlru/commit/8f1a85c))
+
+
+
 <a name="2.1.0"></a>
 # 2.1.0 (2017-10-03)
 
