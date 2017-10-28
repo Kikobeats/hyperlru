@@ -1,3 +1,10 @@
+<a name="2.1.2"></a>
+## 2.1.2 (2017-10-28)
+
+* Add missing dep ([270c33d](https://github.com/kikobeats/hyperlru/commit/270c33d))
+
+
+
 <a name="2.1.1"></a>
 ## 2.1.1 (2017-10-10)
 
