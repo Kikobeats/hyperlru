@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "git-dirty": "latest",
+    "should": "latest",
     "standard": "latest",
     "standard-markdown": "latest"
   },
