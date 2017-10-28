@@ -52,9 +52,9 @@ const cache = createLRU({max: 1000})
 | [tiny-lru](https://npm.im/tiny-lru)                 | 4 kB    | 1.64 kB | 4159 | 10746 | 18909  | 15925 | 4042  |
 | [lru_cache](https://npm.im/lru_cache)               | 2.19 kB | 756 B   | 5320 | 14489 | 10785  | 15963 | 4242  |
 | [simple-lru-cache](https://npm.im/simple-lru-cache) | 1.43 kB | 565 B   | 3289 | 12134 | 8600   | 15266 | 3334  |
-| [hyperlru-object](https://npm.im/hyperlru-object)   | 433 B   | 265 B   | 1152 | 8800  | 6205   | 8635  | 1039  |
+| **[hyperlru-object](https://npm.im/hyperlru-object)**   | 433 B   | 265 B   | 1152 | 8800  | 6205   | 8635  | 1039  |
 | [hashlru](https://npm.im/hashlru)                   | 628 B   | 332 B   | 4438 | 5834  | 4703   | 5960  | 3474  |
-| [hyperlru-map](https://npm.im/hyperlru-map)         | 329 B   | 232 B   | 850  | 4555  | 4030   | 4397  | 690   |
+| **[hyperlru-map](https://npm.im/hyperlru-map)**         | 329 B   | 232 B   | 850  | 4555  | 4030   | 4397  | 690   |
 | [lru](https://npm.im/lru)                           | 6.07 kB | 1.86 kB | 2672 | 3302  | 3142   | 3898  | 1347  |
 | [lru-cache](https://npm.im/lru-cache)               | 19.1 kB | 6.23 kB | 989  | 4702  | 3034   | 4536  | 773   |
 | [secondary-cache](https://npm.im/secondary-cache)   | 22.6 kB | 6.54 kB | 1427 | 2292  | 2740   | 4579  | 1164  |
