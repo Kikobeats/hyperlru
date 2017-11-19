@@ -1,0 +1,94 @@
+{
+  "name": "Kikobeats/hyperlru",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.25"
+  },
+  "title": "",
+  "branch": "",
+  "style": {
+    "name": "Material",
+    "componentSet": {
+      "nav": "nav/DarkAbsoluteNav",
+      "header": "header/GradientHeader",
+      "article": "article/BasicArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "Roboto, sans-serif",
+    "heading": {
+      "fontWeight": 500,
+      "letterSpacing": "-0.01em"
+    },
+    "colors": {
+      "text": "#212121",
+      "background": "#fff",
+      "primary": "#2196f3",
+      "secondary": "#1565c0",
+      "highlight": "#ff4081",
+      "border": "#e0e0e0",
+      "muted": "#f5f5f5"
+    },
+    "layout": {
+      "centered": true,
+      "bannerHeight": "80vh",
+      "maxWidth": 896
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://kikobeats.github.io/hyperlru/",
+          "text": "Home"
+        },
+        {
+          "href": "https://github.com/Kikobeats/hyperlru",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://npmjs.com/package/hyperlru",
+          "text": "npm"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "hyperlru",
+      "subhead": "Tiny & Fast LRU Implementation as possible.",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "hyperlru: Tiny & Fast LRU Implementation as possible.",
+          "url": "https://kikobeats.github.io/hyperlru/"
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "Kikobeats",
+          "repo": "hyperlru"
+        }
+      ],
+      "text": "v2.1.2"
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "\n<p><img src=\"https://img.shields.io/github/tag/Kikobeats/hyperlru.svg?style=flat-square\">\n<a href=\"https://travis-ci.org/Kikobeats/hyperlru\"><img src=\"https://img.shields.io/travis/Kikobeats/hyperlru/master.svg?style=flat-square\"></a>\n<a href=\"https://coveralls.io/github/Kikobeats/hyperlru\"><img src=\"https://img.shields.io/coveralls/Kikobeats/hyperlru.svg?style=flat-square\"></a>\n<a href=\"https://david-dm.org/Kikobeats/hyperlru\"><img src=\"https://img.shields.io/david/Kikobeats/hyperlru.svg?style=flat-square\"></a>\n<a href=\"https://david-dm.org/Kikobeats/hyperlru#info=devDependencies\"><img src=\"https://img.shields.io/david/dev/Kikobeats/hyperlru.svg?style=flat-square\"></a>\n<a href=\"https://www.npmjs.org/package/hyperlru\"><img src=\"https://img.shields.io/npm/dm/hyperlru.svg?style=flat-square\"></a>\n<a href=\"https://paypal.me/Kikobeats\"><img src=\"https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square\"></a></p>\n<blockquote>\n<p>Tiny &amp; Fast LRU Implementation as possible.</p>\n</blockquote>\n<h2>Features</h2>\n<ul>\n<li><strong>Fast</strong>: High performance (See <a href=\"#benchmark\">benchmark</a>).</li>\n<li><strong>Simple</strong>: The whole project is ~60 lines of code.</li>\n<li><strong>Lightweight</strong>: The package weighs less than a megabyte, with zero dependencies.</li>\n</ul>\n<p>There are a lot of LRU implementations, but most of them have a poor perfomance and they are hard to understand.</p>\n<p><strong>hyperlru</strong> is an Abstract LRU implementation using traditional and efficienty data structures:</p>\n<ul>\n<li><strong>Double Linked List</strong>: It maintains the least recent list of items.</li>\n<li><strong>Hash Table</strong> It keeps the data for easily access to cache content.</li>\n</ul>\n<p>For use it, you need to provide one of the created providers:</p>\n<ul>\n<li><a href=\"https://github.com/Kikobeats/hyperlru-object\">hyperlru-object</a></li>\n<li><a href=\"https://github.com/Kikobeats/hyperlru-map\">hyperlru-map</a></li>\n</ul>\n<h2>Install</h2>\n<pre>$ npm install hyperlru --save</pre><h2>Usage</h2>\n<pre><span class=\"hljs-keyword\">const</span> hyperlru = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">&apos;hyperlru&apos;</span>)\n<span class=\"hljs-keyword\">const</span> myProvider = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">&apos;my-hyperlru-provider&apos;</span>)\n\n<span class=\"hljs-keyword\">const</span> createLRU = hyperlru(myProvider)\n<span class=\"hljs-keyword\">const</span> cache = createLRU({<span class=\"hljs-attr\">max</span>: <span class=\"hljs-number\">1000</span>})</pre><h2>Benchmark</h2>\n<table>\n<thead>\n<tr>\n<th>name</th>\n<th>size</th>\n<th>gzip</th>\n<th>set</th>\n<th>get1</th>\n<th>update</th>\n<th>get2</th>\n<th>evict</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><a href=\"https://npm.im/lru-fast\">lru-fast</a></td>\n<td>2.34 kB</td>\n<td>793 B</td>\n<td>6855</td>\n<td>27105</td>\n<td>21550</td>\n<td>25159</td>\n<td>4003</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/tiny-lru\">tiny-lru</a></td>\n<td>4 kB</td>\n<td>1.64 kB</td>\n<td>4159</td>\n<td>10746</td>\n<td>18909</td>\n<td>15925</td>\n<td>4042</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/lru_cache\">lru_cache</a></td>\n<td>2.19 kB</td>\n<td>756 B</td>\n<td>5320</td>\n<td>14489</td>\n<td>10785</td>\n<td>15963</td>\n<td>4242</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/simple-lru-cache\">simple-lru-cache</a></td>\n<td>1.43 kB</td>\n<td>565 B</td>\n<td>3289</td>\n<td>12134</td>\n<td>8600</td>\n<td>15266</td>\n<td>3334</td>\n</tr>\n<tr>\n<td><strong><a href=\"https://npm.im/hyperlru-object\">hyperlru-object</a></strong></td>\n<td>433 B</td>\n<td>265 B</td>\n<td>1152</td>\n<td>8800</td>\n<td>6205</td>\n<td>8635</td>\n<td>1039</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/hashlru\">hashlru</a></td>\n<td>628 B</td>\n<td>332 B</td>\n<td>4438</td>\n<td>5834</td>\n<td>4703</td>\n<td>5960</td>\n<td>3474</td>\n</tr>\n<tr>\n<td><strong><a href=\"https://npm.im/hyperlru-map\">hyperlru-map</a></strong></td>\n<td>329 B</td>\n<td>232 B</td>\n<td>850</td>\n<td>4555</td>\n<td>4030</td>\n<td>4397</td>\n<td>690</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/lru\">lru</a></td>\n<td>6.07 kB</td>\n<td>1.86 kB</td>\n<td>2672</td>\n<td>3302</td>\n<td>3142</td>\n<td>3898</td>\n<td>1347</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/lru-cache\">lru-cache</a></td>\n<td>19.1 kB</td>\n<td>6.23 kB</td>\n<td>989</td>\n<td>4702</td>\n<td>3034</td>\n<td>4536</td>\n<td>773</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/secondary-cache\">secondary-cache</a></td>\n<td>22.6 kB</td>\n<td>6.54 kB</td>\n<td>1427</td>\n<td>2292</td>\n<td>2740</td>\n<td>4579</td>\n<td>1164</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/quick-lru\">quick-lru</a></td>\n<td>1.23 kB</td>\n<td>489 B</td>\n<td>2441</td>\n<td>2075</td>\n<td>2525</td>\n<td>2119</td>\n<td>2525</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/modern-lru\">modern-lru</a></td>\n<td>2.27 kB</td>\n<td>907 B</td>\n<td>1019</td>\n<td>2531</td>\n<td>2021</td>\n<td>2456</td>\n<td>731</td>\n</tr>\n<tr>\n<td><a href=\"https://npm.im/mkc\">mkc</a></td>\n<td>10.5 kB</td>\n<td>3.61 kB</td>\n<td>729</td>\n<td>1230</td>\n<td>715</td>\n<td>1129</td>\n<td>575</td>\n</tr>\n</tbody>\n</table>\n<h2>API</h2>\n<h3>hyperlru([options])</h3>\n<h4>options</h4>\n<h5>max</h5>\n<p>Type: <code>number</code><br>\nDefault: <code>1000</code></p>\n<p>Max of element to keep into the cache.</p>\n<h3>.set(key, value)</h3>\n<p>Set the value of the key and mark the key as most recently used.</p>\n<p>It returns the <code>value</code>.</p>\n<h3>.get(key)</h3>\n<p>Query the value of the key and mark the key as most recently used.</p>\n<p>It returns the value of key if found; <code>undefined</code> otherwise.</p>\n<h3>.peek(key)</h3>\n<p>Query the value of the key without marking the key as most recently used.</p>\n<p>It returns the value of key if found; <code>undefined</code> otherwise.</p>\n<h3>.keys()</h3>\n<p>It retrieves all the keys currently in the cache.</p>\n<h3>.values()</h3>\n<p>It retrieves all the values currently in the cache.</p>\n<h3>.clear()</h3>\n<p>Clear all the elements in the cache.</p>\n<h3>.remove(key)</h3>\n<p>Remove the value from the cache.</p>\n<p>Returns: value of key if found; <code>undefined</code> otherwise.</p>\n<h2>License</h2>\n<p>MIT &#xA9; <a href=\"https://github.com/Kikobeats\">Kiko Beats</a>.</p>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/Kikobeats/hyperlru",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/Kikobeats",
+          "text": "Kikobeats"
+        }
+      ]
+    }
+  ]
+}
