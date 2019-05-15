@@ -41,7 +41,7 @@ const hyperlru = require('hyperlru')
 const myProvider = require('my-hyperlru-provider')
 
 const createLRU = hyperlru(myProvider)
-const cache = createLRU({max: 1000})
+const cache = createLRU({ max: 1000 })
 ```
 
 ## Benchmark
