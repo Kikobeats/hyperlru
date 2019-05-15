@@ -10,7 +10,7 @@ module.exports = createStore => {
   describe('constructor', function () {
     describe('options', function () {
       it('max', function () {
-        const cache = createLRU({max: 3})
+        const cache = createLRU({ max: 3 })
         range(10).forEach((n) => cache.set(`foo${n}`, `bar${n}`))
         should(cache.keys()).be.eql(['foo7', 'foo8', 'foo9'])
       })
@@ -19,11 +19,11 @@ module.exports = createStore => {
 
   describe('.get', function () {
     it('not previous set value is undefined', function () {
-      const cache = createLRU({max: 3})
+      const cache = createLRU({ max: 3 })
       should(cache.get('foo')).be.undefined()
     })
     it('return previous declared value', function () {
-      const cache = createLRU({max: 3})
+      const cache = createLRU({ max: 3 })
       range(10).forEach((n) => cache.set(`foo${n}`, `bar${n}`))
       should(cache.get('foo8')).be.equal('bar8')
     })
@@ -31,14 +31,14 @@ module.exports = createStore => {
 
   describe('.set', function () {
     it('set a value and retrieve it', function () {
-      const cache = createLRU({max: 3})
+      const cache = createLRU({ max: 3 })
       should(cache.set('foo', 'bar')).be.equal('bar')
     })
   })
 
   describe('.keys', function () {
     it('retrieve all the keys', function () {
-      const cache = createLRU({max: 2})
+      const cache = createLRU({ max: 2 })
       range(5).forEach((n) => cache.set(`foo${n}`, `bar${n}`))
       should(cache.keys()).be.eql(['foo3', 'foo4'])
     })
@@ -46,7 +46,7 @@ module.exports = createStore => {
 
   describe('.clear', function () {
     it('remove all the elements', function () {
-      const cache = createLRU({max: 2})
+      const cache = createLRU({ max: 2 })
       cache.set('foo', 'bar')
       cache.clear()
       should(cache.keys().length).be.equal(0)
@@ -55,7 +55,7 @@ module.exports = createStore => {
 
   describe('.remove', function () {
     it('remove one time', function () {
-      const cache = createLRU({max: 2})
+      const cache = createLRU({ max: 2 })
       range(5).forEach((n) => cache.set(`foo${n}`, `bar${n}`))
       cache.remove('foo4')
       should(cache.keys()).be.eql(['foo3'])
@@ -64,7 +64,7 @@ module.exports = createStore => {
 
   describe('.has', function () {
     it('a key that was added previously', function () {
-      const cache = createLRU({max: 2})
+      const cache = createLRU({ max: 2 })
       cache.set('foo', 'bar')
       should(cache.has('foo')).be.true()
     })
@@ -72,7 +72,7 @@ module.exports = createStore => {
 
   describe('.values', function () {
     it('get all values present in the cache', function () {
-      const cache = createLRU({max: 2})
+      const cache = createLRU({ max: 2 })
       cache.set('foo', 'bar')
       should(cache.values()).be.eql(['bar'])
     })

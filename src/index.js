@@ -8,12 +8,12 @@ const hyperlru = createStore => {
     return new TypeError('You need to specify an store implementation')
   }
 
-  return ({max}) => {
+  return ({ max }) => {
     let dict = createStore()
     let list = new LinkedList()
     let size = max
 
-    const _get = ({isPeek}) => key => {
+    const _get = ({ isPeek }) => key => {
       const entry = dict.get(key)
       if (!exists(entry)) return
       if (isPeek) list.append(entry)
@@ -27,7 +27,7 @@ const hyperlru = createStore => {
         entry.value = value
         list.append(entry)
       } else {
-        entry = Object.assign(new LinkedList.Item(), {key, value})
+        entry = Object.assign(new LinkedList.Item(), { key, value })
         dict.set(key, entry)
         !size ? dict.delete(list.head.detach().key) : --size
         list.append(entry)
@@ -51,11 +51,11 @@ const hyperlru = createStore => {
 
     const keys = () => dict.keys()
     const has = key => dict.has(key)
-    const get = _get({isPeek: true})
-    const peek = _get({isPeek: false})
+    const get = _get({ isPeek: true })
+    const peek = _get({ isPeek: false })
     const values = () => dict.values()
 
-    return {set, keys, get, clear, remove, has, peek, values}
+    return { set, keys, get, clear, remove, has, peek, values }
   }
 }
 
