@@ -30,7 +30,7 @@
     "used"
   ],
   "dependencies": {
-    "linked-list": "~2.1.0"
+    "linked-list": "~3.0.1"
   },
   "devDependencies": {
     "git-dirty": "latest",
